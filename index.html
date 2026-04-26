@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alwizen | Utilities & Maintenance Engineer</title>
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['"Space Mono"', 'monospace'],
+                    },
+                    colors: {
+                        neo: {
+                            yellow: '#ffde59',
+                            red: '#ff3131',
+                            blue: '#004aad',
+                            black: '#000000',
+                            white: '#ffffff',
+                            bg: '#f8f8f8', // light mode bg
+                            darkBtn: '#222222'
+                        }
+                    },
+                    boxShadow: {
+                        'neo-light': '4px 4px 0px #000000',
+                        'neo-dark': '4px 4px 0px #ffffff',
+                        'neo-hover-light': '2px 2px 0px #000000',
+                        'neo-hover-dark': '2px 2px 0px #ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: #f8f8f8;
+            color: #000000;
+        }
+
+        /* Neobrutalism Borders */
+        .neo-border {
+            border: 3px solid #000000;
+        }
+        
+        /* Neobrutalism Box Setup Elements */
+        .neo-box {
+            background-color: #ffffff;
+            border: 3px solid #000000;
+            box-shadow: 4px 4px 0px #000000;
+            transition: all 0.15s ease-in-out;
+        }
+
+        /* Interactive Elements */
+        .neo-interactive:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000000;
+        }
+
+        .neo-interactive:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px #000000;
+        }
+        
+        /* Dark mode settings */
+        .dark body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .dark .neo-border {
+            border-color: #ffffff;
+        }
+        .dark .neo-box {
+            background-color: #2a2a2a;
+            border-color: #ffffff;
+            box-shadow: 4px 4px 0px #ffffff;
+        }
+        .dark .neo-interactive:hover {
+            box-shadow: 2px 2px 0px #ffffff;
+        }
+        .dark .neo-interactive:active {
+            box-shadow: 0px 0px 0px #ffffff;
+        }
+        .dark .text-outline {
+            -webkit-text-stroke: 1px #ffffff;
+            color: transparent;
+        }
+
+        /* Utilities */
+        .bg-pattern {
+            background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .dark .bg-pattern {
+            background-image: radial-gradient(#333333 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="antialiased bg-pattern min-h-screen pt-16">
+
+    <!-- Sticky Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 neo-border bg-neo-white dark:bg-[#1a1a1a] border-b-4 border-black dark:border-white">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="font-bold text-xl uppercase tracking-tighter hover:text-neo-red transition-colors">Alwizen.</a>
+            <div class="space-x-4 hidden sm:block font-bold">
+                <a href="#about" class="hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 transition-colors">About</a>
+                <a href="#skills" class="hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 transition-colors">Skills</a>
+                <a href="#experience" class="hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 transition-colors">Experience</a>
+                <a href="#projects" class="hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 transition-colors">Projects</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="neo-box neo-interactive p-1 px-3 font-bold bg-white text-black dark:bg-[#1a1a1a] dark:text-white" aria-label="Toggle Dark Mode">
+                    🌓
+                </button>
+                <a href="#contact" class="hidden sm:inline-block neo-box neo-interactive px-4 py-1 font-bold bg-neo-yellow dark:bg-neo-yellow dark:text-black text-black">Contact</a>
+                
+                <!-- Burger Menu Button -->
+                <button id="mobile-menu-btn" class="sm:hidden neo-box neo-interactive p-1 px-3 font-bold bg-white text-black dark:bg-[#1a1a1a] dark:text-white" aria-label="Open Menu">
+                    ☰
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden sm:hidden border-t-4 border-black dark:border-white bg-white dark:bg-[#1a1a1a]">
+            <div class="flex flex-col px-4 py-4 space-y-4 font-bold text-lg">
+                <a href="#about" class="mobile-link hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 py-2 transition-colors">About</a>
+                <a href="#skills" class="mobile-link hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 py-2 transition-colors">Skills</a>
+                <a href="#experience" class="mobile-link hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 py-2 transition-colors">Experience</a>
+                <a href="#projects" class="mobile-link hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 py-2 transition-colors">Projects</a>
+                <a href="#contact" class="mobile-link neo-box text-center py-3 bg-neo-yellow dark:bg-neo-yellow dark:text-black text-black">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 mb-20 space-y-24">
+        
+        <!-- 1. Hero Section -->
+        <section id="hero" class="pt-24 pb-12 flex flex-col md:flex-row items-center gap-10">
+            <!-- Image -->
+            <div class="w-48 h-48 md:w-64 md:h-64 flex-shrink-0">
+                <div class="w-full h-full neo-box overflow-hidden bg-neo-yellow">
+                    <!-- Default local image me.jpeg found in directory -->
+                    <img src="./me.jpeg" alt="Alwizen" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+            </div>
+            
+            <!-- Text Content -->
+            <div class="flex flex-col gap-4 max-w-2xl">
+                <h1 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter leading-tight bg-neo-yellow text-black px-2 w-fit">
+                    Alwizen
+                </h1>
+                
+                <h2 class="text-2xl md:text-3xl font-bold uppercase">
+                    <span class="bg-neo-blue text-white px-2">Utilities &amp; Maintenance Engineer</span>
+                </h2>
+                
+                <p class="font-bold text-lg md:text-xl">
+                    Web Developer | Linux Enthusiast | Automation Explorer
+                </p>
+                
+                <div class="my-4 p-4 neo-box bg-neo-red text-white">
+                    <p class="font-bold">Currently working at Fuel Terminal Tegal</p>
+                    <p class="text-sm">PT Pertamina Training &amp; Consulting</p>
+                </div>
+                
+                <p class="text-xl border-l-4 border-black dark:border-white pl-4 italic">
+                    "I build systems from server infrastructure to industrial field devices."
+                </p>
+                
+                <div class="flex flex-wrap gap-4 mt-6">
+                    <a href="#projects" class="neo-box neo-interactive bg-white text-black dark:bg-white font-bold text-lg px-8 py-3 uppercase text-center">
+                        View Projects
+                    </a>
+                    <a href="#contact" class="neo-box neo-interactive bg-black text-white dark:bg-black dark:text-white dark:border-white font-bold text-lg px-8 py-3 uppercase text-center hover:bg-neutral-800">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. About Me Section -->
+        <section id="about" class="pt-20">
+            <h2 class="text-4xl font-bold uppercase mb-8 border-b-4 border-black dark:border-white inline-block">About Me</h2>
+            <div class="neo-box p-8 text-lg font-medium space-y-4">
+                <p>I am a Utilities &amp; Maintenance Engineer with strong interests in IT infrastructure, web development, and industrial automation.</p>
+                <p>Currently working at <span class="font-bold bg-neo-yellow text-black px-1">Fuel Terminal Tegal</span> through PT Pertamina Training &amp; Consulting supporting utilities operation and maintenance systems.</p>
+                <p>Previously worked as IT Support at <span class="font-bold bg-neo-blue text-white px-1">RSU Comal Baru</span> handling hardware troubleshooting, networking support, and operational system maintenance.</p>
+                <p>Also experienced as an entrepreneur managing an international shipping service (<span class="font-bold bg-neo-red text-white px-1">POS Otista</span>).</p>
+                <p>I enjoy building systems from Linux server setup to application deployment and automation devices.</p>
+            </div>
+        </section>
+
+        <!-- 3. Skills Section -->
+        <section id="skills" class="pt-20">
+            <h2 class="text-4xl font-bold uppercase mb-8 border-b-4 border-black dark:border-white inline-block">Skills</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Skill Card 1 -->
+                <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
+                    <h3 class="text-2xl font-bold mb-4 bg-neo-yellow inline-block px-2 border-2 border-black text-black">Web Development</h3>
+                    <ul class="space-y-2 font-bold list-disc list-inside marker:text-neo-blue">
+                        <li>Laravel</li>
+                        <li>PHP</li>
+                        <li>MySQL</li>
+                        <li>REST API</li>
+                    </ul>
+                </div>
+                
+                <!-- Skill Card 2 -->
+                <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
+                    <h3 class="text-2xl font-bold mb-4 bg-neo-blue text-white inline-block px-2 border-2 border-black">Infrastructure</h3>
+                    <ul class="space-y-2 font-bold list-disc list-inside marker:text-neo-yellow">
+                        <li>Linux</li>
+                        <li>VPS Deployment</li>
+                        <li>Nginx</li>
+                        <li>SSH Hardening</li>
+                        <li>Self-hosted services</li>
+                    </ul>
+                </div>
+                
+                <!-- Skill Card 3 -->
+                <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
+                    <h3 class="text-2xl font-bold mb-4 bg-neo-red text-white inline-block px-2 border-2 border-black">IT Support</h3>
+                    <ul class="space-y-2 font-bold list-disc list-inside marker:text-black dark:marker:text-white">
+                        <li>Hardware troubleshooting</li>
+                        <li>Network troubleshooting</li>
+                        <li>System installation</li>
+                    </ul>
+                </div>
+                
+                <!-- Skill Card 4 -->
+                <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
+                    <h3 class="text-2xl font-bold mb-4 bg-black text-white dark:bg-white dark:text-black inline-block px-2 border-2 border-black">Industrial Tech</h3>
+                    <ul class="space-y-2 font-bold list-disc list-inside marker:text-neo-red">
+                        <li>PLC</li>
+                        <li>Arduino</li>
+                        <li>Utilities systems</li>
+                        <li>Maintenance engineering</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Experience Timeline Section -->
+        <section id="experience" class="pt-20">
+            <h2 class="text-4xl font-bold uppercase mb-8 border-b-4 border-black dark:border-white inline-block">Experience</h2>
+            
+            <div class="relative border-l-4 border-black dark:border-white ml-6 space-y-8 pb-4">
+                
+                <!-- Timeline Item 1 -->
+                <div class="relative pl-8">
+                    <div class="absolute w-6 h-6 bg-neo-yellow border-4 border-black -left-[14px] top-1"></div>
+                    <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
+                        <h3 class="text-2xl font-bold">Utilities &amp; Maintenance Engineer</h3>
+                        <p class="font-bold text-neo-blue text-lg mb-2">Fuel Terminal Tegal | PT Pertamina Training &amp; Consulting</p>
+                        <p class="font-medium">Supporting utilities operations and maintaining industrial and maintenance systems.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 2 -->
+                <div class="relative pl-8">
+                    <div class="absolute w-6 h-6 bg-neo-blue border-4 border-black -left-[14px] top-1"></div>
+                    <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
+                        <h3 class="text-2xl font-bold">IT Support</h3>
+                        <p class="font-bold text-neo-red text-lg mb-2">RSU Comal Baru</p>
+                        <p class="font-medium">Hardware troubleshooting, networking support, and operational system maintenance.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 3 -->
+                <div class="relative pl-8">
+                    <div class="absolute w-6 h-6 bg-neo-red border-4 border-black -left-[14px] top-1"></div>
+                    <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
+                        <h3 class="text-2xl font-bold">Entrepreneur</h3>
+                        <p class="font-bold text-black dark:text-white dark:bg-black bg-neo-yellow px-1 inline-block text-lg mb-2">POS Otista</p>
+                        <p class="font-medium mt-2">Managing an international shipping service business operations.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. Projects Section -->
+        <section id="projects" class="pt-20">
+            <h2 class="text-4xl font-bold uppercase mb-8 border-b-4 border-black dark:border-white inline-block">Projects</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a]">
+                    <div class="h-48 bg-neo-blue border-b-4 border-black flex items-center justify-center overflow-hidden relative">
+                       <span class="text-5xl opacity-50">🌐</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-2">Laravel VPS Deployment</h3>
+                        <p class="font-medium mb-4 flex-grow">Automated script and configuration guide for deploying Laravel apps to Linux VPS environments.</p>
+                        <a href="https://github.com/alwizen" target="_blank" class="neo-box neo-interactive text-center py-2 bg-neo-yellow dark:text-black font-bold uppercase">View on GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a]">
+                    <div class="h-48 bg-neo-red border-b-4 border-black flex items-center justify-center overflow-hidden relative">
+                       <span class="text-5xl opacity-50">🐧</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-2">Linux Homelab Setup</h3>
+                        <p class="font-medium mb-4 flex-grow">Dockerized self-hosted infrastructure showcasing system administration and network management skills.</p>
+                        <a href="https://github.com/alwizen" target="_blank" class="neo-box neo-interactive text-center py-2 bg-neo-yellow dark:text-black font-bold uppercase">View on GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a]">
+                    <div class="h-48 bg-neo-yellow border-b-4 border-black flex items-center justify-center overflow-hidden relative">
+                       <span class="text-5xl opacity-50">🤖</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-2">Arduino Automation</h3>
+                        <p class="font-medium mb-4 flex-grow">Experimental industrial automation projects integrating sensors with microcontroller logic.</p>
+                        <a href="https://github.com/alwizen" target="_blank" class="neo-box neo-interactive text-center py-2 bg-neo-yellow dark:text-black font-bold uppercase">View on GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a]">
+                    <div class="h-48 bg-black border-b-4 border-black flex items-center justify-center overflow-hidden relative">
+                       <span class="text-5xl opacity-50">📊</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-2 text-white dark:text-black bg-black dark:bg-white inline-block px-1">System Monitoring</h3>
+                        <p class="font-medium mb-4 flex-grow">Bash and Python scripts for real-time monitoring of Linux server health and resources.</p>
+                        <a href="https://github.com/alwizen" target="_blank" class="neo-box neo-interactive text-center py-2 bg-neo-yellow dark:text-black font-bold uppercase">View on GitHub</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. Contact Section -->
+        <section id="contact" class="pt-20 pb-20">
+            <h2 class="text-4xl font-bold uppercase mb-8 border-b-4 border-black dark:border-white inline-block">Contact</h2>
+            
+            <div class="neo-box bg-neo-yellow dark:bg-neo-yellow dark:text-black p-8 md:p-12 text-center">
+                <h3 class="text-3xl font-bold uppercase mb-4">Let's Work Together</h3>
+                <p class="text-xl font-medium mb-8 max-w-2xl mx-auto">Feel free to reach out if you're looking for a developer, IT support, or an engineer to build your next system.</p>
+                
+                <a href="mailto:email@placeholder.com" class="neo-box neo-interactive inline-block px-8 py-4 bg-black text-white text-xl font-bold uppercase hover:bg-neutral-800 transition-colors mb-12 border-4 border-black">
+                    Email Me
+                </a>
+                
+                <div class="flex flex-wrap justify-center gap-6 mt-8">
+                    <a href="https://github.com/alwizen" target="_blank" class="neo-box neo-interactive bg-white dark:bg-white text-black px-6 py-2 font-bold uppercase">GitHub</a>
+                    <a href="https://id.linkedin.com/in/akhmad-alvi-zen-524b7223a" target="_blank" class="neo-box neo-interactive bg-white dark:bg-white text-black px-6 py-2 font-bold uppercase">LinkedIn</a>
+                    <a href="https://instagram.com/alwiz3n" target="_blank" class="neo-box neo-interactive bg-white dark:bg-white text-black px-6 py-2 font-bold uppercase">Instagram</a>
+                    <a href="https://facebook.com/knxvt" target="_blank" class="neo-box neo-interactive bg-white dark:bg-white text-black px-6 py-2 font-bold uppercase">Facebook</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t-4 border-black dark:border-white bg-white dark:bg-[#1a1a1a] py-6 text-center">
+        <p class="font-bold">© 2026 Alwizen. Built with Neo-brutalism.</p>
+    </footer>    <script>
+        // Check for saved theme preference or system preference
+        const isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.theme = 'light';
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.theme = 'dark';
+                }
+            });
+
+            // Mobile menu toggle logic
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenuBtn.textContent = mobileMenu.classList.contains('hidden') ? '☰' : '✕';
+            });
+
+            // Close mobile menu when clicking a link
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.textContent = '☰';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
