@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alwizen | Utilities & Maintenance Engineer</title>
+    <link rel="icon" type="image/x-icon" href="./src/fav.ico">
     <!-- Tailwind CSS Script -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -54,6 +55,7 @@
             background-color: #ffffff;
             border: 3px solid #000000;
             box-shadow: 4px 4px 0px #000000;
+            border-radius: 1.5rem;
             transition: all 0.15s ease-in-out;
         }
 
@@ -100,89 +102,129 @@
         .dark .bg-pattern {
             background-image: radial-gradient(#333333 1px, transparent 1px);
         }
+        
+        /* Hide scrollbar for slider */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none;    /* Firefox */
+        }
     </style>
 </head>
 <body class="antialiased bg-pattern min-h-screen pt-16">
 
     <!-- Sticky Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 neo-border bg-neo-white dark:bg-[#1a1a1a] border-b-4 border-black dark:border-white">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="font-bold text-xl uppercase tracking-tighter hover:text-neo-red transition-colors">Alwizen.</a>
-            <div class="space-x-4 hidden sm:block font-bold">
-                <a href="#about" class="hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 transition-colors">About</a>
-                <a href="#skills" class="hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 transition-colors">Skills</a>
-                <a href="#experience" class="hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 transition-colors">Experience</a>
-                <a href="#projects" class="hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 transition-colors">Projects</a>
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#f8f8f8] dark:bg-[#1a1a1a] border-b-[3px] border-black dark:border-white">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="font-bold text-2xl tracking-tighter flex items-center gap-2 text-black dark:text-white hover:text-blue-600 transition-colors">
+                <span class="text-3xl leading-none font-sans">✽</span> Alwizen
+            </a>
+            <div class="space-x-8 hidden sm:flex font-bold text-black dark:text-white text-sm">
+                <a href="#about" class="hover:text-blue-600 transition-colors">About</a>
+                <a href="#skills" class="hover:text-blue-600 transition-colors">Skills</a>
+                <a href="#experience" class="hover:text-blue-600 transition-colors">Experience</a>
+                <a href="#projects" class="hover:text-blue-600 transition-colors">Projects</a>
             </div>
             <div class="flex items-center gap-4">
-                <button id="theme-toggle" class="neo-box neo-interactive p-1 px-3 font-bold bg-white text-black dark:bg-[#1a1a1a] dark:text-white" aria-label="Toggle Dark Mode">
+                <button id="theme-toggle" class="p-2 font-bold bg-white text-black border-[3px] border-black rounded-full shadow-[2px_2px_0px_#000] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_#000] transition-all" aria-label="Toggle Dark Mode">
                     🌓
                 </button>
-                <a href="#contact" class="hidden sm:inline-block neo-box neo-interactive px-4 py-1 font-bold bg-neo-yellow dark:bg-neo-yellow dark:text-black text-black">Contact</a>
+                <a href="#contact" class="hidden sm:inline-block px-6 py-2 font-bold bg-[#ffe156] border-[3px] border-black rounded-full text-black hover:bg-[#f6d73f] transition-colors shadow-[2px_2px_0px_#000] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_#000]">CONTACT</a>
                 
                 <!-- Burger Menu Button -->
-                <button id="mobile-menu-btn" class="sm:hidden neo-box neo-interactive p-1 px-3 font-bold bg-white text-black dark:bg-[#1a1a1a] dark:text-white" aria-label="Open Menu">
+                <button id="mobile-menu-btn" class="sm:hidden p-2 font-bold bg-white text-black border-[3px] border-black rounded-full shadow-[2px_2px_0px_#000]" aria-label="Open Menu">
                     ☰
                 </button>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden sm:hidden border-t-4 border-black dark:border-white bg-white dark:bg-[#1a1a1a]">
+        <div id="mobile-menu" class="hidden sm:hidden border-t-[3px] border-black dark:border-white bg-[#f8f8f8] dark:bg-[#1a1a1a]">
             <div class="flex flex-col px-4 py-4 space-y-4 font-bold text-lg">
-                <a href="#about" class="mobile-link hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 py-2 transition-colors">About</a>
-                <a href="#skills" class="mobile-link hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 py-2 transition-colors">Skills</a>
-                <a href="#experience" class="mobile-link hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 py-2 transition-colors">Experience</a>
-                <a href="#projects" class="mobile-link hover:bg-neo-yellow dark:hover:bg-neo-blue dark:hover:text-white hover:text-black px-2 py-2 transition-colors">Projects</a>
-                <a href="#contact" class="mobile-link neo-box text-center py-3 bg-neo-yellow dark:bg-neo-yellow dark:text-black text-black">Contact</a>
+                <a href="#about" class="mobile-link text-black hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800 px-2 py-2 rounded-xl transition-colors">About</a>
+                <a href="#skills" class="mobile-link text-black hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800 px-2 py-2 rounded-xl transition-colors">Skills</a>
+                <a href="#experience" class="mobile-link text-black hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800 px-2 py-2 rounded-xl transition-colors">Experience</a>
+                <a href="#projects" class="mobile-link text-black hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800 px-2 py-2 rounded-xl transition-colors">Projects</a>
+                <a href="#contact" class="mobile-link text-center py-3 bg-[#ffe156] border-[3px] border-black text-black rounded-full shadow-[2px_2px_0px_#000] font-bold">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 mb-20 space-y-24">
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 mb-20 space-y-16">
         
-        <!-- 1. Hero Section -->
-        <section id="hero" class="pt-24 pb-12 flex flex-col md:flex-row items-center gap-10">
-            <!-- Image -->
-            <div class="w-48 h-48 md:w-64 md:h-64 flex-shrink-0">
-                <div class="w-full h-full neo-box overflow-hidden bg-neo-yellow">
-                    <!-- Default local image me.jpeg found in directory -->
-                    <img src="./me.jpeg" alt="Alwizen" class="w-full h-full object-cover ">
+        <!-- 1. Hero Section with New Layout -->
+        <section id="hero" class="pt-24 pb-2">
+            <div class="relative bg-gradient-to-br from-[#fdf0f4] via-[#e3f0ff] to-[#fffbea] border-[3px] border-black rounded-[2.5rem] p-8 md:p-14 shadow-[8px_8px_0px_#000] overflow-hidden flex flex-col md:flex-row gap-10 items-center dark:from-[#3a202a] dark:via-[#1a2f4c] dark:to-[#38331a]">
+                
+                <!-- Text Content -->
+                <div class="flex flex-col gap-6 w-full md:w-3/5 relative z-10">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full border-[3px] border-black overflow-hidden bg-[#ffe156]">
+                            <img src="./src/me.jpeg" class="w-full h-full object-cover" alt="Avatar">
+                        </div>
+                        <span class="font-bold text-xl text-black dark:text-white bg-white/50 dark:bg-black/50 px-4 py-1 rounded-full border-[3px] border-black">Alwizen</span>
+                    </div>
+
+                    <p class="text-lg md:text-xl text-gray-800 dark:text-gray-200 font-medium">
+                        I am a utilities and digital infrastructure professional helping business operations, startups, and institutions shape a reliable environment. I provide solutions custom-made for the tech ecosystem.
+                    </p>
+                </div>
+
+                <!-- Right Image / Graphics -->
+                <div class="w-full md:w-2/5 relative z-10 hidden md:block">
+                    <!-- Polygon Decorative Background -->
+                    <div class="absolute inset-0 bg-black translate-x-4 translate-y-4" style="clip-path: polygon(15% 0%, 100% 10%, 85% 100%, 30% 90%, 0% 50%, 5% 20%);"></div>
+                    
+                    <!-- Polygon Image Wrapper -->
+                    <div class="relative w-full h-[350px] border-[4px] border-black bg-white overflow-hidden" style="clip-path: polygon(15% 0%, 100% 10%, 85% 100%, 30% 90%, 0% 50%, 5% 20%);">
+                        <img src="./src/hero.png" class="w-full h-full object-cover" alt="Engineer">
+                    </div>
+
+                    <!-- Yellow Badge -->
+                    <!-- <div class="absolute -left-6 top-1/2 -translate-y-1/2 bg-[#ffe156] text-black font-bold p-2 border-[3px] border-black rounded-full rotate-[-15deg] w-24 h-24 flex items-center justify-center text-center shadow-[4px_4px_0px_#000] text-sm leading-tight z-20 hover:rotate-0 transition-transform cursor-pointer">
+                        GET<br>STARTED<br>→
+                    </div> -->
                 </div>
             </div>
-            
-            <!-- Text Content -->
-            <div class="flex flex-col gap-4 max-w-2xl">
-                <h1 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter leading-tight bg-neo-yellow text-black px-2 w-fit">
-                    Alwizen
-                </h1>
-                
-                <h2 class="text-2xl md:text-3xl font-bold uppercase">
-                    <span class="bg-neo-blue text-white px-2">Utilities &amp; Maintenance Engineer</span>
-                </h2>
-                
-                <p class="font-bold text-lg md:text-xl">
-                    Web Developer | Linux Enthusiast | Automation Explorer
+        </section>
+
+        <!-- Category Cards below Hero -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="bg-[#ffe156] border-[3px] border-black rounded-[2rem] p-8 shadow-[6px_6px_0px_#000] flex flex-col items-start gap-4">
+                <div class="text-4xl text-black">💡</div>
+                <h3 class="text-2xl font-bold text-black mt-2">Web Development</h3>
+                <p class="font-medium text-black/80 flex-grow text-lg">
+                    Full lifecycle creation, modern stacks, and web application development.
                 </p>
-                
-                <div class="my-4 p-4 neo-box bg-neo-red text-white">
-                    <p class="font-bold">Currently working at Fuel Terminal Tegal</p>
-                    <p class="text-sm">PT Pertamina Training &amp; Consulting</p>
-                </div>
-                
-                <p class="text-xl border-l-4 border-black dark:border-white pl-4 italic">
-                    "I build systems from server infrastructure to industrial field devices."
+                <a href="#projects" class="mt-4 bg-black text-white px-6 py-2 rounded-full font-bold inline-flex items-center gap-2 hover:bg-neutral-800 transition-colors">
+                    Learn More <span>&rarr;</span>
+                </a>
+            </div>
+            <!-- Card 2 -->
+            <div class="bg-[#38f89e] border-[3px] border-black rounded-[2rem] p-8 shadow-[6px_6px_0px_#000] flex flex-col items-start gap-4">
+                <div class="text-4xl text-black">🗂️</div>
+                <h3 class="text-2xl font-bold text-black mt-2">IT Operations</h3>
+                <p class="font-medium text-black/80 flex-grow text-lg">
+                    Strategic infrastructure management, Linux server deployment, and VPS.
                 </p>
-                
-                <div class="flex flex-wrap gap-4 mt-6">
-                    <a href="#projects" class="neo-box neo-interactive bg-white text-black dark:bg-white font-bold text-lg px-8 py-3 uppercase text-center">
-                        View Projects
-                    </a>
-                    <a href="#contact" class="neo-box neo-interactive bg-black text-white dark:bg-black dark:text-white dark:border-white font-bold text-lg px-8 py-3 uppercase text-center hover:bg-neutral-800">
-                        Contact Me
-                    </a>
-                </div>
+                <a href="#experience" class="mt-4 bg-black text-white px-6 py-2 rounded-full font-bold inline-flex items-center gap-2 hover:bg-neutral-800 transition-colors">
+                    Learn More <span>&rarr;</span>
+                </a>
+            </div>
+            <!-- Card 3 -->
+            <div class="bg-[#ffccfe] border-[3px] border-black rounded-[2rem] p-8 shadow-[6px_6px_0px_#000] flex flex-col items-start gap-4">
+                <div class="text-4xl text-black">⚙️</div>
+                <h3 class="text-2xl font-bold text-black mt-2">Sys Automation</h3>
+                <p class="font-medium text-black/80 flex-grow text-lg">
+                    Industrial microcontrollers, direct hardware integration, and utilities.
+                </p>
+                <a href="#projects" class="mt-4 bg-black text-white px-6 py-2 rounded-full font-bold inline-flex items-center gap-2 hover:bg-neutral-800 transition-colors">
+                    Learn More <span>&rarr;</span>
+                </a>
             </div>
         </section>
 
@@ -240,8 +282,7 @@
                 <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
                     <h3 class="text-2xl font-bold mb-4 bg-black text-white dark:bg-white dark:text-black inline-block px-2 border-2 border-black">Industrial Tech</h3>
                     <ul class="space-y-2 font-bold list-disc list-inside marker:text-neo-red">
-                        <li>PLC</li>
-                        <li>Arduino</li>
+                        <li>Microcontrollers</li>
                         <li>Utilities systems</li>
                         <li>Maintenance engineering</li>
                     </ul>
@@ -292,53 +333,77 @@
         <section id="projects" class="pt-20">
             <h2 class="text-4xl font-bold uppercase mb-8 border-b-4 border-black dark:border-white inline-block">Projects</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 pt-4 hide-scrollbar" style="scroll-padding-left: 1rem;">
                 
                 <!-- Project 1 -->
-                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a]">
-                    <div class="h-48 bg-neo-blue border-b-4 border-black flex items-center justify-center overflow-hidden relative">
-                       <span class="text-5xl opacity-50">🌐</span>
+                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
+                    <div class="h-48 bg-neo-blue border-b-[3px] border-black flex items-center justify-center relative shrink-0">
+                       <img src="./src/1.png" class="w-full h-full object-cover" alt="JagaPaket">
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold mb-2">Laravel VPS Deployment</h3>
-                        <p class="font-medium mb-4 flex-grow">Automated script and configuration guide for deploying Laravel apps to Linux VPS environments.</p>
-                        <a href="https://github.com/alwizen" target="_blank" class="neo-box neo-interactive text-center py-2 bg-neo-yellow dark:text-black font-bold uppercase">View on GitHub</a>
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">JagaPaket</h3>
+                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Aplikasi khusus untuk seller marketplace yang merekam proses packing & pengiriman paket dalam bentuk video sebagai bukti dokumentasi saat terkendala.</p>
+                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
                     </div>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a]">
-                    <div class="h-48 bg-neo-red border-b-4 border-black flex items-center justify-center overflow-hidden relative">
-                       <span class="text-5xl opacity-50">🐧</span>
+                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
+                    <div class="h-48 bg-neo-red border-b-[3px] border-black flex items-center justify-center relative shrink-0">
+                       <img src="./src/2.png" class="w-full h-full object-cover" alt="Aplikasi Operasional MBG/SPPG">
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold mb-2">Linux Homelab Setup</h3>
-                        <p class="font-medium mb-4 flex-grow">Dockerized self-hosted infrastructure showcasing system administration and network management skills.</p>
-                        <a href="https://github.com/alwizen" target="_blank" class="neo-box neo-interactive text-center py-2 bg-neo-yellow dark:text-black font-bold uppercase">View on GitHub</a>
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">Aplikasi Operasional MBG/SPPG</h3>
+                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Sistem operasional terintegrasi untuk kegiatan mengelola bahan baku, distribusi, hingga monitoring penerima manfaat secara real-time.</p>
+                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
                     </div>
                 </div>
 
                 <!-- Project 3 -->
-                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a]">
-                    <div class="h-48 bg-neo-yellow border-b-4 border-black flex items-center justify-center overflow-hidden relative">
-                       <span class="text-5xl opacity-50">🤖</span>
+                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
+                    <div class="h-48 bg-[#ffe156] border-b-[3px] border-black flex items-center justify-center relative shrink-0">
+                       <img src="./src/3.png" class="w-full h-full object-cover" alt="Aplikasi Absensi Sekolah">
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold mb-2">Arduino Automation</h3>
-                        <p class="font-medium mb-4 flex-grow">Experimental industrial automation projects integrating sensors with microcontroller logic.</p>
-                        <a href="https://github.com/alwizen" target="_blank" class="neo-box neo-interactive text-center py-2 bg-neo-yellow dark:text-black font-bold uppercase">View on GitHub</a>
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">Aplikasi Absensi Sekolah</h3>
+                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Aplikasi absensi digital yang merekap kehadiran guru dan siswa otomatis dari jam masuk hingga pulang secara akurat & efisien.</p>
+                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
                     </div>
                 </div>
 
                 <!-- Project 4 -->
-                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a]">
-                    <div class="h-48 bg-black border-b-4 border-black flex items-center justify-center overflow-hidden relative">
-                       <span class="text-5xl opacity-50">📊</span>
+                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
+                    <div class="h-48 bg-black border-b-[3px] border-black flex items-center justify-center relative shrink-0">
+                       <img src="./src/4.png" class="w-full h-full object-cover" alt="Tracker Pengeluaran & Pemasukan">
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold mb-2 text-white dark:text-black bg-black dark:bg-white inline-block px-1">System Monitoring</h3>
-                        <p class="font-medium mb-4 flex-grow">Bash and Python scripts for real-time monitoring of Linux server health and resources.</p>
-                        <a href="https://github.com/alwizen" target="_blank" class="neo-box neo-interactive text-center py-2 bg-neo-yellow dark:text-black font-bold uppercase">View on GitHub</a>
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">Tracker Pengeluaran & Pemasukan</h3>
+                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Aplikasi pencatatan keuangan agar dapat memonitor cashflow. Cocok untuk kebutuhan pribadi maupun operasional bisnis dan UMKM.</p>
+                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
+                    <div class="h-48 bg-[#38f89e] border-b-[3px] border-black flex items-center justify-center relative shrink-0">
+                       <img src="./src/5.png" class="w-full h-full object-cover" alt="Invoice Generator">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">Invoice Generator</h3>
+                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Aplikasi pembuat invoice digital yang memudahkan bisnis, freelancer, dan perusahaan membuat serta mengelola tagihan secara profesional.</p>
+                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
+                    <div class="h-48 bg-[#ffccfe] border-b-[3px] border-black flex items-center justify-center relative shrink-0">
+                       <img src="./src/6.png" class="w-full h-full object-cover" alt="Personal & Company Website">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">Personal & Company Website</h3>
+                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Solusi pengembangan website portofolio pribadi hingga profil perusahaan. Dirancang responsif, interaktif, dan optimal (SEO-friendly) untuk menunjang kehadiran digital.</p>
+                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
                     </div>
                 </div>
 
@@ -406,6 +471,35 @@
                     mobileMenuBtn.textContent = '☰';
                 });
             });
+
+            // Auto-scroll slider logic
+            const slider = document.querySelector('#projects .overflow-x-auto');
+            if(slider) {
+                let sliderInterval;
+                const startAutoScroll = () => {
+                    sliderInterval = setInterval(() => {
+                        const card = slider.children[0];
+                        if (!card) return;
+                        
+                        const scrollStep = card.offsetWidth + 24; // 24px is standard gap-6
+                        
+                        // Check if we reached the right edge (within 10px tolerance)
+                        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+                            slider.scrollTo({ left: 0, behavior: 'smooth' });
+                        } else {
+                            slider.scrollTo({ left: slider.scrollLeft + scrollStep, behavior: 'smooth' });
+                        }
+                    }, 1000); // wait 1 second per slide
+                };
+
+                startAutoScroll();
+
+                // Pause on hover or touch so user can read/click
+                slider.addEventListener('mouseenter', () => clearInterval(sliderInterval));
+                slider.addEventListener('mouseleave', startAutoScroll);
+                slider.addEventListener('touchstart', () => clearInterval(sliderInterval), {passive: true});
+                slider.addEventListener('touchend', startAutoScroll);
+            }
         });
     </script>
 </body>
