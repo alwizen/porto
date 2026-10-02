@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alwizen | Utilities & Maintenance Engineer</title>
+    <link rel="icon" type="image/x-icon" href="./src/fav.ico">
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        // Neumorphic light surface palette
+                        soft: {
+                            base: '#e8ecf3',
+                            light: '#ffffff',
+                            dark: '#c3cbd9',
+                            text: '#4b5566',
+                            muted: '#7a8699',
+                            accent: '#6d8cff',
+                            accent2: '#8a7dff',
+                        },
+                        // Neumorphic dark surface palette
+                        sofDark: {
+                            base: '#22262f',
+                            light: '#2c313c',
+                            dark: '#171a20',
+                            text: '#cdd4e0',
+                            muted: '#8b93a3',
+                            accent: '#7d96ff',
+                            accent2: '#9c8dff',
+                        }
+                    },
+                    boxShadow: {
+                        // Light theme
+                        'neu': '8px 8px 20px #c3cbd9, -8px -8px 20px #ffffff',
+                        'neu-sm': '4px 4px 10px #c3cbd9, -4px -4px 10px #ffffff',
+                        'neu-in': 'inset 5px 5px 12px #c3cbd9, inset -5px -5px 12px #ffffff',
+                        'neu-in-sm': 'inset 3px 3px 7px #c3cbd9, inset -3px -3px 7px #ffffff',
+                        'neu-press': 'inset 4px 4px 9px #c3cbd9, inset -4px -4px 9px #ffffff',
+                        // Dark theme
+                        'neud': '8px 8px 20px #171a20, -8px -8px 20px #2c313c',
+                        'neud-sm': '4px 4px 10px #171a20, -4px -4px 10px #2c313c',
+                        'neud-in': 'inset 5px 5px 12px #171a20, inset -5px -5px 12px #2c313c',
+                        'neud-in-sm': 'inset 3px 3px 7px #171a20, inset -3px -3px 7px #2c313c',
+                        'neud-press': 'inset 4px 4px 9px #171a20, inset -4px -4px 9px #2c313c',
+                    },
+                    borderRadius: {
+                        'neu': '1.75rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Nunito', system-ui, sans-serif;
+            background-color: #e8ecf3;
+            color: #4b5566;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+        .dark body {
+            background-color: #22262f;
+            color: #cdd4e0;
+        }
+
+        /* Neumorphic raised surface */
+        .neu {
+            background: #e8ecf3;
+            border-radius: 1.75rem;
+            box-shadow: 8px 8px 20px #c3cbd9, -8px -8px 20px #ffffff;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .dark .neu {
+            background: #22262f;
+            box-shadow: 8px 8px 20px #171a20, -8px -8px 20px #2c313c;
+        }
+
+        /* Soft raised (small) */
+        .neu-sm {
+            background: #e8ecf3;
+            border-radius: 1.25rem;
+            box-shadow: 4px 4px 10px #c3cbd9, -4px -4px 10px #ffffff;
+        }
+        .dark .neu-sm {
+            background: #22262f;
+            box-shadow: 4px 4px 10px #171a20, -4px -4px 10px #2c313c;
+        }
+
+        /* Inset / pressed surface */
+        .neu-in {
+            background: #e8ecf3;
+            border-radius: 1.5rem;
+            box-shadow: inset 5px 5px 12px #c3cbd9, inset -5px -5px 12px #ffffff;
+        }
+        .dark .neu-in {
+            background: #22262f;
+            box-shadow: inset 5px 5px 12px #171a20, inset -5px -5px 12px #2c313c;
+        }
+
+        /* Interactive: press-in on hover/active */
+        .neu-interactive {
+            cursor: pointer;
+        }
+        .neu-interactive:hover {
+            box-shadow: inset 4px 4px 9px #c3cbd9, inset -4px -4px 9px #ffffff;
+            transform: translateY(1px);
+        }
+        .dark .neu-interactive:hover {
+            box-shadow: inset 4px 4px 9px #171a20, inset -4px -4px 9px #2c313c;
+        }
+        .neu-interactive:active {
+            box-shadow: inset 6px 6px 12px #c3cbd9, inset -6px -6px 12px #ffffff;
+            transform: translateY(2px);
+        }
+        .dark .neu-interactive:active {
+            box-shadow: inset 6px 6px 12px #171a20, inset -6px -6px 12px #2c313c;
+        }
+
+        /* Accent pill */
+        .neu-accent {
+            background: linear-gradient(135deg, #6d8cff, #8a7dff);
+            color: #ffffff;
+            border-radius: 1.25rem;
+            box-shadow: 4px 4px 12px #c3cbd9, -4px -4px 12px #ffffff;
+        }
+        .dark .neu-accent {
+            background: linear-gradient(135deg, #7d96ff, #9c8dff);
+            box-shadow: 4px 4px 12px #171a20, -4px -4px 12px #2c313c;
+        }
+        .neu-accent:hover {
+            box-shadow: inset 4px 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Hide scrollbar for slider */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Subtle dot pattern background (soft, not neobrutalist) */
+        .bg-dots {
+            background-image: radial-gradient(rgba(109,140,255,0.18) 1.5px, transparent 1.5px);
+            background-size: 26px 26px;
+        }
+        .dark .bg-dots {
+            background-image: radial-gradient(rgba(157,141,255,0.14) 1.5px, transparent 1.5px);
+        }
+    </style>
+</head>
+<body class="antialiased bg-dots min-h-screen pt-24">
+
+    <!-- Sticky Navigation -->
+    <nav class="fixed top-4 left-0 w-full z-50 px-4">
+        <div class="max-w-6xl mx-auto neu-sm px-4 py-3 flex justify-between items-center">
+            <a href="#" class="font-extrabold text-xl tracking-tight flex items-center gap-2 text-soft-text dark:text-sofDark-text">
+                <span class="neu-in w-9 h-9 flex items-center justify-center rounded-full text-lg">✽</span> Alwizen
+            </a>
+            <div class="space-x-2 hidden sm:flex font-bold text-soft-muted dark:text-sofDark-muted text-sm">
+                <a href="#about" class="px-4 py-2 rounded-full hover:shadow-[inset_3px_3px_7px_#c3cbd9,inset_-3px_-3px_7px_#ffffff] dark:hover:shadow-[inset_3px_3px_7px_#171a20,inset_-3px_-3px_7px_#2c313c] transition-all">About</a>
+                <a href="#skills" class="px-4 py-2 rounded-full hover:shadow-[inset_3px_3px_7px_#c3cbd9,inset_-3px_-3px_7px_#ffffff] dark:hover:shadow-[inset_3px_3px_7px_#171a20,inset_-3px_-3px_7px_#2c313c] transition-all">Skills</a>
+                <a href="#experience" class="px-4 py-2 rounded-full hover:shadow-[inset_3px_3px_7px_#c3cbd9,inset_-3px_-3px_7px_#ffffff] dark:hover:shadow-[inset_3px_3px_7px_#171a20,inset_-3px_-3px_7px_#2c313c] transition-all">Experience</a>
+                <a href="#projects" class="px-4 py-2 rounded-full hover:shadow-[inset_3px_3px_7px_#c3cbd9,inset_-3px_-3px_7px_#ffffff] dark:hover:shadow-[inset_3px_3px_7px_#171a20,inset_-3px_-3px_7px_#2c313c] transition-all">Projects</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" class="neu-sm neu-interactive w-11 h-11 rounded-full flex items-center justify-center text-lg" aria-label="Toggle Dark Mode">
+                    🌓
+                </button>
+                <a href="#contact" class="hidden sm:inline-flex items-center px-6 py-3 neu-accent font-bold text-sm uppercase tracking-wide">Contact</a>
+
+                <!-- Burger Menu Button -->
+                <button id="mobile-menu-btn" class="sm:hidden neu-sm neu-interactive w-11 h-11 rounded-full flex items-center justify-center text-lg" aria-label="Open Menu">
+                    ☰
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden sm:hidden max-w-6xl mx-auto mt-3 neu p-4">
+            <div class="flex flex-col gap-3 font-bold">
+                <a href="#about" class="mobile-link px-4 py-3 rounded-2xl neu-in text-center">About</a>
+                <a href="#skills" class="mobile-link px-4 py-3 rounded-2xl neu-in text-center">Skills</a>
+                <a href="#experience" class="mobile-link px-4 py-3 rounded-2xl neu-in text-center">Experience</a>
+                <a href="#projects" class="mobile-link px-4 py-3 rounded-2xl neu-in text-center">Projects</a>
+                <a href="#contact" class="mobile-link px-4 py-3 rounded-2xl neu-accent text-center">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 mb-20 space-y-20">
+
+        <!-- 1. Hero Section -->
+        <section id="hero" class="pt-10 pb-2">
+            <div class="neu p-8 md:p-14 overflow-hidden flex flex-col md:flex-row gap-10 items-center">
+                <!-- Text Content -->
+                <div class="flex flex-col gap-6 w-full md:w-3/5 relative z-10">
+                    <div class="flex items-center gap-3">
+                        <div class="w-14 h-14 rounded-full neu-in p-1">
+                            <img src="./src/me.jpeg" class="w-full h-full object-cover rounded-full" alt="Avatar">
+                        </div>
+                        <span class="font-extrabold text-lg px-5 py-2 rounded-full neu-in text-soft-text dark:text-sofDark-text">Alwizen</span>
+                    </div>
+
+                    <h1 class="text-3xl md:text-4xl font-extrabold leading-snug text-soft-text dark:text-sofDark-text">
+                        Utilities &amp; Digital Infrastructure
+                        <span class="bg-gradient-to-r from-soft-accent to-soft-accent2 dark:from-sofDark-accent dark:to-sofDark-accent2 bg-clip-text text-transparent">Engineer</span>
+                    </h1>
+
+                    <p class="text-base md:text-lg text-soft-muted dark:text-sofDark-muted font-medium">
+                        I am a utilities and digital infrastructure professional helping business operations, startups, and institutions shape a reliable environment. I provide solutions custom-made for the tech ecosystem.
+                    </p>
+
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <a href="#projects" class="neu-accent px-6 py-3 font-bold">View Projects</a>
+                        <a href="#contact" class="neu neu-interactive px-6 py-3 font-bold text-soft-text dark:text-sofDark-text">Get in Touch</a>
+                    </div>
+                </div>
+
+                <!-- Right Image / Animated Icon -->
+                <div class="w-full md:w-2/5 relative z-10 hidden md:block">
+                    <div class="neu-in rounded-[2.5rem] p-4">
+                        <div class="relative w-full h-[340px] rounded-[2rem] overflow-hidden flex items-center justify-center">
+                            <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+                            <dotlottie-wc src="https://lottie.host/9039ee61-f375-45f5-8c5b-5ade5d68b733/lsDePx97OM.lottie" style="width: 100%; height: 100%;" autoplay loop></dotlottie-wc>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Cards below Hero -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="neu neu-interactive p-8 flex flex-col items-start gap-4">
+                <div class="neu-in w-16 h-16 rounded-2xl flex items-center justify-center text-3xl">💡</div>
+                <h3 class="text-xl font-extrabold text-soft-text dark:text-sofDark-text mt-2">Web Development</h3>
+                <p class="font-medium text-soft-muted dark:text-sofDark-muted flex-grow">
+                    Full lifecycle creation, modern stacks, and web application development.
+                </p>
+                <a href="#projects" class="mt-2 font-bold text-soft-accent dark:text-sofDark-accent flex items-center gap-2">
+                    Learn More <span>&rarr;</span>
+                </a>
+            </div>
+            <!-- Card 2 -->
+            <div class="neu neu-interactive p-8 flex flex-col items-start gap-4">
+                <div class="neu-in w-16 h-16 rounded-2xl flex items-center justify-center text-3xl">🗂️</div>
+                <h3 class="text-xl font-extrabold text-soft-text dark:text-sofDark-text mt-2">IT Operations</h3>
+                <p class="font-medium text-soft-muted dark:text-sofDark-muted flex-grow">
+                    Strategic infrastructure management, Linux server deployment, and VPS.
+                </p>
+                <a href="#experience" class="mt-2 font-bold text-soft-accent dark:text-sofDark-accent flex items-center gap-2">
+                    Learn More <span>&rarr;</span>
+                </a>
+            </div>
+            <!-- Card 3 -->
+            <div class="neu neu-interactive p-8 flex flex-col items-start gap-4">
+                <div class="neu-in w-16 h-16 rounded-2xl flex items-center justify-center text-3xl">⚙️</div>
+                <h3 class="text-xl font-extrabold text-soft-text dark:text-sofDark-text mt-2">Sys Automation</h3>
+                <p class="font-medium text-soft-muted dark:text-sofDark-muted flex-grow">
+                    Industrial microcontrollers, direct hardware integration, and utilities.
+                </p>
+                <a href="#projects" class="mt-2 font-bold text-soft-accent dark:text-sofDark-accent flex items-center gap-2">
+                    Learn More <span>&rarr;</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. About Me Section -->
+        <section id="about" class="pt-4">
+            <h2 class="text-3xl font-extrabold mb-8 text-soft-text dark:text-sofDark-text">About Me</h2>
+            <div class="neu p-8 md:p-10 text-base md:text-lg font-medium space-y-4 text-soft-muted dark:text-sofDark-muted">
+                <p>I am a Utilities &amp; Maintenance Engineer with strong interests in IT infrastructure, web development, and industrial automation.</p>
+                <p>Currently working at <span class="font-extrabold text-soft-text dark:text-sofDark-text">Fuel Terminal Tegal</span> through PT Pertamina Training &amp; Consulting supporting utilities operation and maintenance systems.</p>
+                <p>Previously worked as IT Support at <span class="font-extrabold text-soft-text dark:text-sofDark-text">RSU Comal Baru</span> handling hardware troubleshooting, networking support, and operational system maintenance.</p>
+                <p>Also experienced as an entrepreneur managing an international shipping service (<span class="font-extrabold text-soft-text dark:text-sofDark-text">POS Otista</span>).</p>
+                <p>I enjoy building systems from Linux server setup to application deployment and automation devices.</p>
+            </div>
+        </section>
+
+        <!-- 3. Skills Section -->
+        <section id="skills" class="pt-4">
+            <h2 class="text-3xl font-extrabold mb-8 text-soft-text dark:text-sofDark-text">Skills</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Skill Card 1 -->
+                <div class="neu p-8">
+                    <h3 class="text-lg font-extrabold mb-5 inline-block px-4 py-1.5 rounded-full neu-in text-soft-text dark:text-sofDark-text">Web Development</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">Laravel</span>
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">PHP</span>
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">MySQL</span>
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">REST API</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 2 -->
+                <div class="neu p-8">
+                    <h3 class="text-lg font-extrabold mb-5 inline-block px-4 py-1.5 rounded-full neu-in text-soft-text dark:text-sofDark-text">Infrastructure</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">Linux</span>
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">VPS Deployment</span>
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">Nginx</span>
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">SSH Hardening</span>
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">Self-hosted</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 3 -->
+                <div class="neu p-8">
+                    <h3 class="text-lg font-extrabold mb-5 inline-block px-4 py-1.5 rounded-full neu-in text-soft-text dark:text-sofDark-text">IT Support</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">Hardware troubleshooting</span>
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">Network troubleshooting</span>
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">System installation</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 4 -->
+                <div class="neu p-8">
+                    <h3 class="text-lg font-extrabold mb-5 inline-block px-4 py-1.5 rounded-full neu-in text-soft-text dark:text-sofDark-text">Industrial Tech</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">Microcontrollers</span>
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">Utilities systems</span>
+                        <span class="neu-sm px-4 py-2 rounded-full font-bold text-sm text-soft-muted dark:text-sofDark-muted">Maintenance engineering</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Experience Timeline Section -->
+        <section id="experience" class="pt-4">
+            <h2 class="text-3xl font-extrabold mb-8 text-soft-text dark:text-sofDark-text">Experience</h2>
+
+            <div class="relative ml-6 space-y-8 pb-4 border-l-0">
+                <!-- Timeline Item 1 -->
+                <div class="relative pl-8">
+                    <div class="absolute w-7 h-7 rounded-full neu-accent -left-[14px] top-6 flex items-center justify-center"></div>
+                    <div class="neu p-6">
+                        <h3 class="text-xl font-extrabold text-soft-text dark:text-sofDark-text">Utilities &amp; Maintenance Engineer</h3>
+                        <p class="font-bold text-soft-accent dark:text-sofDark-accent mb-2">Fuel Terminal Tegal | PT Pertamina Training &amp; Consulting</p>
+                        <p class="font-medium text-soft-muted dark:text-sofDark-muted">Supporting utilities operations and maintaining industrial and maintenance systems.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="relative pl-8">
+                    <div class="absolute w-7 h-7 rounded-full neu-accent -left-[14px] top-6 flex items-center justify-center"></div>
+                    <div class="neu p-6">
+                        <h3 class="text-xl font-extrabold text-soft-text dark:text-sofDark-text">IT Support</h3>
+                        <p class="font-bold text-soft-accent dark:text-sofDark-accent mb-2">RSU Comal Baru</p>
+                        <p class="font-medium text-soft-muted dark:text-sofDark-muted">Hardware troubleshooting, networking support, and operational system maintenance.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="relative pl-8">
+                    <div class="absolute w-7 h-7 rounded-full neu-accent -left-[14px] top-6 flex items-center justify-center"></div>
+                    <div class="neu p-6">
+                        <h3 class="text-xl font-extrabold text-soft-text dark:text-sofDark-text">Entrepreneur</h3>
+                        <p class="font-bold text-soft-accent dark:text-sofDark-accent mb-2">POS Otista</p>
+                        <p class="font-medium text-soft-muted dark:text-sofDark-muted">Managing an international shipping service business operations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Projects Section -->
+        <section id="projects" class="pt-4">
+            <h2 class="text-3xl font-extrabold mb-8 text-soft-text dark:text-sofDark-text">Projects</h2>
+
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-8 pt-6 hide-scrollbar" style="scroll-padding-left: 1rem;">
+
+                <!-- Project 1 -->
+                <div class="neu flex flex-col h-full overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start">
+                    <div class="m-3 rounded-[1.4rem] overflow-hidden neu-in p-2">
+                        <div class="h-44 rounded-[1.1rem] overflow-hidden">
+                            <img src="./src/1.png" class="w-full h-full object-cover" alt="JagaPaket">
+                        </div>
+                    </div>
+                    <div class="p-6 pt-2 flex-grow flex flex-col">
+                        <h3 class="text-xl font-extrabold mb-3 text-soft-text dark:text-sofDark-text leading-tight">JagaPaket</h3>
+                        <p class="font-medium mb-4 flex-grow text-soft-muted dark:text-sofDark-muted text-base">Aplikasi khusus untuk seller marketplace yang merekam proses packing &amp; pengiriman paket dalam bentuk video sebagai bukti dokumentasi saat terkendala.</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="neu flex flex-col h-full overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start">
+                    <div class="m-3 rounded-[1.4rem] overflow-hidden neu-in p-2">
+                        <div class="h-44 rounded-[1.1rem] overflow-hidden">
+                            <img src="./src/2.png" class="w-full h-full object-cover" alt="Aplikasi Operasional MBG/SPPG">
+                        </div>
+                    </div>
+                    <div class="p-6 pt-2 flex-grow flex flex-col">
+                        <h3 class="text-xl font-extrabold mb-3 text-soft-text dark:text-sofDark-text leading-tight">Aplikasi Operasional MBG/SPPG</h3>
+                        <p class="font-medium mb-4 flex-grow text-soft-muted dark:text-sofDark-muted text-base">Sistem operasional terintegrasi untuk kegiatan mengelola bahan baku, distribusi, hingga monitoring penerima manfaat secara real-time.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="neu flex flex-col h-full overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start">
+                    <div class="m-3 rounded-[1.4rem] overflow-hidden neu-in p-2">
+                        <div class="h-44 rounded-[1.1rem] overflow-hidden">
+                            <img src="./src/3.png" class="w-full h-full object-cover" alt="Aplikasi Absensi Sekolah">
+                        </div>
+                    </div>
+                    <div class="p-6 pt-2 flex-grow flex flex-col">
+                        <h3 class="text-xl font-extrabold mb-3 text-soft-text dark:text-sofDark-text leading-tight">Aplikasi Absensi Sekolah</h3>
+                        <p class="font-medium mb-4 flex-grow text-soft-muted dark:text-sofDark-muted text-base">Aplikasi absensi digital yang merekap kehadiran guru dan siswa otomatis dari jam masuk hingga pulang secara akurat &amp; efisien.</p>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="neu flex flex-col h-full overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start">
+                    <div class="m-3 rounded-[1.4rem] overflow-hidden neu-in p-2">
+                        <div class="h-44 rounded-[1.1rem] overflow-hidden">
+                            <img src="./src/4.png" class="w-full h-full object-cover" alt="Tracker Pengeluaran & Pemasukan">
+                        </div>
+                    </div>
+                    <div class="p-6 pt-2 flex-grow flex flex-col">
+                        <h3 class="text-xl font-extrabold mb-3 text-soft-text dark:text-sofDark-text leading-tight">Tracker Pengeluaran &amp; Pemasukan</h3>
+                        <p class="font-medium mb-4 flex-grow text-soft-muted dark:text-sofDark-muted text-base">Aplikasi pencatatan keuangan agar dapat memonitor cashflow. Cocok untuk kebutuhan pribadi maupun operasional bisnis dan UMKM.</p>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="neu flex flex-col h-full overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start">
+                    <div class="m-3 rounded-[1.4rem] overflow-hidden neu-in p-2">
+                        <div class="h-44 rounded-[1.1rem] overflow-hidden">
+                            <img src="./src/5.png" class="w-full h-full object-cover" alt="Invoice Generator">
+                        </div>
+                    </div>
+                    <div class="p-6 pt-2 flex-grow flex flex-col">
+                        <h3 class="text-xl font-extrabold mb-3 text-soft-text dark:text-sofDark-text leading-tight">Invoice Generator</h3>
+                        <p class="font-medium mb-4 flex-grow text-soft-muted dark:text-sofDark-muted text-base">Aplikasi pembuat invoice digital yang memudahkan bisnis, freelancer, dan perusahaan membuat serta mengelola tagihan secara profesional.</p>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="neu flex flex-col h-full overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start">
+                    <div class="m-3 rounded-[1.4rem] overflow-hidden neu-in p-2">
+                        <div class="h-44 rounded-[1.1rem] overflow-hidden">
+                            <img src="./src/6.png" class="w-full h-full object-cover" alt="Personal & Company Website">
+                        </div>
+                    </div>
+                    <div class="p-6 pt-2 flex-grow flex flex-col">
+                        <h3 class="text-xl font-extrabold mb-3 text-soft-text dark:text-sofDark-text leading-tight">Personal &amp; Company Website</h3>
+                        <p class="font-medium mb-4 flex-grow text-soft-muted dark:text-sofDark-muted text-base">Solusi pengembangan website portofolio pribadi hingga profil perusahaan. Dirancang responsif, interaktif, dan optimal (SEO-friendly) untuk menunjang kehadiran digital.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. Contact Section -->
+        <section id="contact" class="pt-4 pb-20">
+            <h2 class="text-3xl font-extrabold mb-8 text-soft-text dark:text-sofDark-text">Contact</h2>
+
+            <div class="neu p-8 md:p-12 text-center">
+                <h3 class="text-2xl font-extrabold mb-4 text-soft-text dark:text-sofDark-text">Let's Work Together</h3>
+                <p class="text-lg font-medium mb-8 max-w-2xl mx-auto text-soft-muted dark:text-sofDark-muted">Feel free to reach out if you're looking for a developer, IT support, or an engineer to build your next system.</p>
+
+                <a href="mailto:alwizen@outlook.com" class="neu-accent inline-flex items-center px-8 py-4 text-lg font-bold uppercase mb-12">
+                    Email Me
+                </a>
+
+                <div class="flex flex-wrap justify-center gap-5 mt-8">
+                    <a href="https://github.com/alwizen" target="_blank" class="neu-sm neu-interactive px-6 py-3 rounded-full font-bold text-soft-muted dark:text-sofDark-muted">GitHub</a>
+                    <a href="https://id.linkedin.com/in/akhmad-alvi-zen-524b7223a" target="_blank" class="neu-sm neu-interactive px-6 py-3 rounded-full font-bold text-soft-muted dark:text-sofDark-muted">LinkedIn</a>
+                    <a href="https://instagram.com/alwiz3n" target="_blank" class="neu-sm neu-interactive px-6 py-3 rounded-full font-bold text-soft-muted dark:text-sofDark-muted">Instagram</a>
+                    <a href="https://facebook.com/knxvt" target="_blank" class="neu-sm neu-interactive px-6 py-3 rounded-full font-bold text-soft-muted dark:text-sofDark-muted">Facebook</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-6 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="neu-sm py-4 rounded-2xl">
+                <p class="font-bold text-soft-muted dark:text-sofDark-muted">© 2026 Alwizen.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Check for saved theme preference or system preference
+        const isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.theme = 'light';
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.theme = 'dark';
+                }
+            });
+
+            // Mobile menu toggle logic
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenuBtn.textContent = mobileMenu.classList.contains('hidden') ? '☰' : '✕';
+            });
+
+            // Close mobile menu when clicking a link
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.textContent = '☰';
+                });
+            });
+
+            // Auto-scroll slider logic
+            const slider = document.querySelector('#projects .overflow-x-auto');
+            if(slider) {
+                let sliderInterval;
+                const startAutoScroll = () => {
+                    sliderInterval = setInterval(() => {
+                        const card = slider.children[0];
+                        if (!card) return;
+
+                        const scrollStep = card.offsetWidth + 32; // 32px is gap-8
+
+                        // Check if we reached the right edge (within 10px tolerance)
+                        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+                            slider.scrollTo({ left: 0, behavior: 'smooth' });
+                        } else {
+                            slider.scrollTo({ left: slider.scrollLeft + scrollStep, behavior: 'smooth' });
+                        }
+                    }, 1000); // wait 1 second per slide
+                };
+
+                startAutoScroll();
+
+                // Pause on hover or touch so user can read/click
+                slider.addEventListener('mouseenter', () => clearInterval(sliderInterval));
+                slider.addEventListener('mouseleave', startAutoScroll);
+                slider.addEventListener('touchstart', () => clearInterval(sliderInterval), {passive: true});
+                slider.addEventListener('touchend', startAutoScroll);
+            }
+        });
+    </script>
+</body>
+</html>

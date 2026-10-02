@@ -1,506 +1,338 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alwizen | Utilities & Maintenance Engineer</title>
+    <title>NOTHING</title>
     <link rel="icon" type="image/x-icon" href="./src/fav.ico">
-    <!-- Tailwind CSS Script -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        mono: ['"Space Mono"', 'monospace'],
-                    },
-                    colors: {
-                        neo: {
-                            yellow: '#ffde59',
-                            red: '#ff3131',
-                            blue: '#004aad',
-                            black: '#000000',
-                            white: '#ffffff',
-                            bg: '#f8f8f8', // light mode bg
-                            darkBtn: '#222222'
-                        }
-                    },
-                    boxShadow: {
-                        'neo-light': '4px 4px 0px #000000',
-                        'neo-dark': '4px 4px 0px #ffffff',
-                        'neo-hover-light': '2px 2px 0px #000000',
-                        'neo-hover-dark': '2px 2px 0px #ffffff',
-                    }
-                }
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #02010a;
+            /* Custom star cursor */
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M16 1l4.2 9.8L30 15l-9.8 4.2L16 29l-4.2-9.8L2 15l9.8-4.2z' fill='%23ffffff' stroke='%23ffde59' stroke-width='1.5'/></svg>") 16 16, auto;
+        }
+
+        a, button, .nothing {
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M16 1l4.2 9.8L30 15l-9.8 4.2L16 29l-4.2-9.8L2 15l9.8-4.2z' fill='%23ffde59' stroke='%23ff3131' stroke-width='1.5'/></svg>") 16 16, pointer;
+        }
+
+        /* ==== Space background layers ==== */
+        .space {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(88, 28, 135, 0.45), transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(30, 64, 175, 0.40), transparent 55%),
+                radial-gradient(ellipse at 55% 90%, rgba(190, 24, 93, 0.28), transparent 60%),
+                linear-gradient(180deg, #02010a 0%, #050214 50%, #010007 100%);
+        }
+
+        /* Slow drifting nebula clouds */
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.55;
+            mix-blend-mode: screen;
+        }
+
+        .nebula.a {
+            width: 60vmax;
+            height: 60vmax;
+            top: -20vmax;
+            left: -15vmax;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.75), transparent 70%);
+            animation: drift1 40s ease-in-out infinite alternate;
+        }
+
+        .nebula.b {
+            width: 50vmax;
+            height: 50vmax;
+            bottom: -18vmax;
+            right: -12vmax;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.7), transparent 70%);
+            animation: drift2 52s ease-in-out infinite alternate;
+        }
+
+        .nebula.c {
+            width: 45vmax;
+            height: 45vmax;
+            top: 35%;
+            left: 45%;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.45), transparent 70%);
+            animation: drift3 64s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift1 {
+            from { transform: translate3d(0, 0, 0) scale(1); }
+            to   { transform: translate3d(12vw, 10vh, 0) scale(1.25); }
+        }
+        @keyframes drift2 {
+            from { transform: translate3d(0, 0, 0) scale(1.15); }
+            to   { transform: translate3d(-14vw, -8vh, 0) scale(0.9); }
+        }
+        @keyframes drift3 {
+            from { transform: translate3d(-6vw, 6vh, 0) scale(0.95); }
+            to   { transform: translate3d(8vw, -10vh, 0) scale(1.2); }
+        }
+
+        /* Star layers (twinkling) */
+        .stars,
+        .stars2,
+        .stars3 {
+            position: absolute;
+            inset: -50%;
+            background-repeat: repeat;
+            will-change: transform, opacity;
+        }
+
+        .stars {
+            background-image:
+                radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 120px 80px, #cbd5ff, transparent),
+                radial-gradient(1px 1px at 200px 150px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 300px 60px, #ffe9c4, transparent),
+                radial-gradient(1px 1px at 380px 210px, #fff, transparent);
+            background-size: 420px 260px;
+            animation: twinkle 5s ease-in-out infinite, pan 240s linear infinite;
+        }
+
+        .stars2 {
+            background-image:
+                radial-gradient(2px 2px at 60px 120px, #ffffff, transparent),
+                radial-gradient(2.5px 2.5px at 260px 40px, #bcd2ff, transparent),
+                radial-gradient(1.8px 1.8px at 160px 220px, #fff, transparent),
+                radial-gradient(2px 2px at 340px 160px, #ffd9ec, transparent);
+            background-size: 520px 360px;
+            animation: twinkle 7s ease-in-out infinite reverse, pan 360s linear infinite reverse;
+            opacity: 0.9;
+        }
+
+        .stars3 {
+            background-image:
+                radial-gradient(3px 3px at 90px 60px, #ffffff, transparent),
+                radial-gradient(3.5px 3.5px at 300px 200px, #a5c8ff, transparent);
+            background-size: 700px 500px;
+            animation: twinkle 9s ease-in-out infinite, pan 520s linear infinite;
+            filter: blur(0.4px);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; }
+            50%      { opacity: 1; }
+        }
+
+        @keyframes pan {
+            from { transform: translate3d(0, 0, 0); }
+            to   { transform: translate3d(-420px, -260px, 0); }
+        }
+
+        /* Shooting star */
+        .shooting {
+            position: absolute;
+            top: 15%;
+            left: -10%;
+            width: 160px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffffff);
+            border-radius: 999px;
+            filter: drop-shadow(0 0 6px #fff);
+            opacity: 0;
+            transform: rotate(20deg);
+            animation: shoot 8s ease-in 3s infinite;
+        }
+
+        .shooting.two {
+            top: 55%;
+            left: -10%;
+            animation: shoot 12s ease-in 7s infinite;
+            width: 120px;
+        }
+
+        @keyframes shoot {
+            0%   { transform: translate3d(0, 0, 0) rotate(20deg); opacity: 0; }
+            5%   { opacity: 1; }
+            25%  { transform: translate3d(120vw, 45vh, 0) rotate(20deg); opacity: 0; }
+            100% { transform: translate3d(120vw, 45vh, 0) rotate(20deg); opacity: 0; }
+        }
+
+        /* ==== Hero ==== */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .nothing {
+            position: relative;
+            z-index: 1;
+            font-size: min(16vw, 20rem);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            color: rgba(255, 255, 255, 0.75);
+            text-shadow: 0 0 24px rgba(255, 255, 255, 0.28), 0 0 60px rgba(147, 51, 234, 0.4);
+            user-select: none;
+            animation: float 6s ease-in-out infinite;
+            white-space: nowrap;
+            padding: 0 2vw;
+        }
+
+        /* Full-width continuous red strike-through line */
+        .nothing::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: clamp(3px, 1.1vw, 14px);
+            background: #ff3131;
+            box-shadow: 0 0 18px rgba(255, 49, 49, 0.7);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Lottie background behind the text */
+        .hero-lottie {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+
+        .hero-lottie dotlottie-wc {
+            width: 100%;
+            height: 100%;
+            max-width: 900px;
+            max-height: 900px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-14px); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .stars, .stars2, .stars3, .nebula, .shooting, .nothing {
+                animation: none !important;
             }
         }
-    </script>
-    <style>
-        /* Base styles */
-        body {
-            font-family: 'Space Mono', monospace;
-            background-color: #f8f8f8;
-            color: #000000;
+
+        /* ==== Glowing star cursor trail ==== */
+        .cursor-star {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            margin: -4px 0 0 -4px;
+            pointer-events: none;
+            z-index: 9999;
+            background: radial-gradient(circle, #ffffff 0%, #ffde59 45%, transparent 70%);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 222, 89, 0.9), 0 0 20px rgba(147, 51, 234, 0.7);
+            transform: translate(-100px, -100px);
         }
 
-        /* Neobrutalism Borders */
-        .neo-border {
-            border: 3px solid #000000;
-        }
-        
-        /* Neobrutalism Box Setup Elements */
-        .neo-box {
-            background-color: #ffffff;
-            border: 3px solid #000000;
-            box-shadow: 4px 4px 0px #000000;
-            border-radius: 1.5rem;
-            transition: all 0.15s ease-in-out;
+        .cursor-star::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 14px;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.6);
+            clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+            animation: spinStar 3s linear infinite;
         }
 
-        /* Interactive Elements */
-        .neo-interactive:hover {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px #000000;
+        @keyframes spinStar {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
         }
 
-        .neo-interactive:active {
-            transform: translate(4px, 4px);
-            box-shadow: 0px 0px 0px #000000;
-        }
-        
-        /* Dark mode settings */
-        .dark body {
-            background-color: #1a1a1a;
-            color: #ffffff;
-        }
-        .dark .neo-border {
-            border-color: #ffffff;
-        }
-        .dark .neo-box {
-            background-color: #2a2a2a;
-            border-color: #ffffff;
-            box-shadow: 4px 4px 0px #ffffff;
-        }
-        .dark .neo-interactive:hover {
-            box-shadow: 2px 2px 0px #ffffff;
-        }
-        .dark .neo-interactive:active {
-            box-shadow: 0px 0px 0px #ffffff;
-        }
-        .dark .text-outline {
-            -webkit-text-stroke: 1px #ffffff;
-            color: transparent;
-        }
-
-        /* Utilities */
-        .bg-pattern {
-            background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-        .dark .bg-pattern {
-            background-image: radial-gradient(#333333 1px, transparent 1px);
-        }
-        
-        /* Hide scrollbar for slider */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none;    /* Firefox */
+        @media (pointer: coarse) {
+            .cursor-star { display: none; }
+            body, a, button, .nothing { cursor: auto; }
         }
     </style>
 </head>
-<body class="antialiased bg-pattern min-h-screen pt-16">
+<body>
+    <!-- Animated space background -->
+    <div class="space" aria-hidden="true">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="nebula a"></div>
+        <div class="nebula b"></div>
+        <div class="nebula c"></div>
+        <div class="shooting"></div>
+        <div class="shooting two"></div>
+    </div>
 
-    <!-- Sticky Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 bg-[#f8f8f8] dark:bg-[#1a1a1a] border-b-[3px] border-black dark:border-white">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="font-bold text-2xl tracking-tighter flex items-center gap-2 text-black dark:text-white hover:text-blue-600 transition-colors">
-                <span class="text-3xl leading-none font-sans">✽</span> Alwizen
-            </a>
-            <div class="space-x-8 hidden sm:flex font-bold text-black dark:text-white text-sm">
-                <a href="#about" class="hover:text-blue-600 transition-colors">About</a>
-                <a href="#skills" class="hover:text-blue-600 transition-colors">Skills</a>
-                <a href="#experience" class="hover:text-blue-600 transition-colors">Experience</a>
-                <a href="#projects" class="hover:text-blue-600 transition-colors">Projects</a>
-            </div>
-            <div class="flex items-center gap-4">
-                <button id="theme-toggle" class="p-2 font-bold bg-white text-black border-[3px] border-black rounded-full shadow-[2px_2px_0px_#000] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_#000] transition-all" aria-label="Toggle Dark Mode">
-                    🌓
-                </button>
-                <a href="#contact" class="hidden sm:inline-block px-6 py-2 font-bold bg-[#ffe156] border-[3px] border-black rounded-full text-black hover:bg-[#f6d73f] transition-colors shadow-[2px_2px_0px_#000] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_#000]">CONTACT</a>
-                
-                <!-- Burger Menu Button -->
-                <button id="mobile-menu-btn" class="sm:hidden p-2 font-bold bg-white text-black border-[3px] border-black rounded-full shadow-[2px_2px_0px_#000]" aria-label="Open Menu">
-                    ☰
-                </button>
-            </div>
+    <section class="hero">
+        <div class="hero-lottie" aria-hidden="true">
+            <dotlottie-wc src="https://lottie.host/d289b154-6561-4237-95a1-48e41e8a8959/DIMza7h9pb.lottie" autoplay loop></dotlottie-wc>
         </div>
+        <h1 class="nothing">NOTHING</h1>
+    </section>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden sm:hidden border-t-[3px] border-black dark:border-white bg-[#f8f8f8] dark:bg-[#1a1a1a]">
-            <div class="flex flex-col px-4 py-4 space-y-4 font-bold text-lg">
-                <a href="#about" class="mobile-link text-black hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800 px-2 py-2 rounded-xl transition-colors">About</a>
-                <a href="#skills" class="mobile-link text-black hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800 px-2 py-2 rounded-xl transition-colors">Skills</a>
-                <a href="#experience" class="mobile-link text-black hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800 px-2 py-2 rounded-xl transition-colors">Experience</a>
-                <a href="#projects" class="mobile-link text-black hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800 px-2 py-2 rounded-xl transition-colors">Projects</a>
-                <a href="#contact" class="mobile-link text-center py-3 bg-[#ffe156] border-[3px] border-black text-black rounded-full shadow-[2px_2px_0px_#000] font-bold">Contact</a>
-            </div>
-        </div>
-    </nav>
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
 
-    <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 mb-20 space-y-16">
-        
-        <!-- 1. Hero Section with New Layout -->
-        <section id="hero" class="pt-24 pb-2">
-            <div class="relative bg-gradient-to-br from-[#fdf0f4] via-[#e3f0ff] to-[#fffbea] border-[3px] border-black rounded-[2.5rem] p-8 md:p-14 shadow-[8px_8px_0px_#000] overflow-hidden flex flex-col md:flex-row gap-10 items-center dark:from-[#3a202a] dark:via-[#1a2f4c] dark:to-[#38331a]">
-                
-                <!-- Text Content -->
-                <div class="flex flex-col gap-6 w-full md:w-3/5 relative z-10">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-full border-[3px] border-black overflow-hidden bg-[#ffe156]">
-                            <img src="./src/me.jpeg" class="w-full h-full object-cover" alt="Avatar">
-                        </div>
-                        <span class="font-bold text-xl text-black dark:text-white bg-white/50 dark:bg-black/50 px-4 py-1 rounded-full border-[3px] border-black">Alwizen</span>
-                    </div>
+    <!-- Glowing star cursor -->
+    <div class="cursor-star" aria-hidden="true"></div>
 
-                    <p class="text-lg md:text-xl text-gray-800 dark:text-gray-200 font-medium">
-                        I am a utilities and digital infrastructure professional helping business operations, startups, and institutions shape a reliable environment. I provide solutions custom-made for the tech ecosystem.
-                    </p>
-                </div>
+    <script>
+        (function () {
+            var star = document.querySelector('.cursor-star');
+            if (!star) return;
 
-                <!-- Right Image / Graphics -->
-                <div class="w-full md:w-2/5 relative z-10 hidden md:block">
-                    <!-- Polygon Decorative Background -->
-                    <div class="absolute inset-0 bg-black translate-x-4 translate-y-4" style="clip-path: polygon(15% 0%, 100% 10%, 85% 100%, 30% 90%, 0% 50%, 5% 20%);"></div>
-                    
-                    <!-- Polygon Image Wrapper -->
-                    <div class="relative w-full h-[350px] border-[4px] border-black bg-white overflow-hidden" style="clip-path: polygon(15% 0%, 100% 10%, 85% 100%, 30% 90%, 0% 50%, 5% 20%);">
-                        <img src="./src/hero.png" class="w-full h-full object-cover" alt="Engineer">
-                    </div>
+            var x = window.innerWidth / 2;
+            var y = window.innerHeight / 2;
+            var curX = x, curY = y;
 
-                    <!-- Yellow Badge -->
-                    <!-- <div class="absolute -left-6 top-1/2 -translate-y-1/2 bg-[#ffe156] text-black font-bold p-2 border-[3px] border-black rounded-full rotate-[-15deg] w-24 h-24 flex items-center justify-center text-center shadow-[4px_4px_0px_#000] text-sm leading-tight z-20 hover:rotate-0 transition-transform cursor-pointer">
-                        GET<br>STARTED<br>→
-                    </div> -->
-                </div>
-            </div>
-        </section>
+            window.addEventListener('mousemove', function (e) {
+                x = e.clientX;
+                y = e.clientY;
+            }, { passive: true });
 
-        <!-- Category Cards below Hero -->
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Card 1 -->
-            <div class="bg-[#ffe156] border-[3px] border-black rounded-[2rem] p-8 shadow-[6px_6px_0px_#000] flex flex-col items-start gap-4">
-                <div class="text-4xl text-black">💡</div>
-                <h3 class="text-2xl font-bold text-black mt-2">Web Development</h3>
-                <p class="font-medium text-black/80 flex-grow text-lg">
-                    Full lifecycle creation, modern stacks, and web application development.
-                </p>
-                <a href="#projects" class="mt-4 bg-black text-white px-6 py-2 rounded-full font-bold inline-flex items-center gap-2 hover:bg-neutral-800 transition-colors">
-                    Learn More <span>&rarr;</span>
-                </a>
-            </div>
-            <!-- Card 2 -->
-            <div class="bg-[#38f89e] border-[3px] border-black rounded-[2rem] p-8 shadow-[6px_6px_0px_#000] flex flex-col items-start gap-4">
-                <div class="text-4xl text-black">🗂️</div>
-                <h3 class="text-2xl font-bold text-black mt-2">IT Operations</h3>
-                <p class="font-medium text-black/80 flex-grow text-lg">
-                    Strategic infrastructure management, Linux server deployment, and VPS.
-                </p>
-                <a href="#experience" class="mt-4 bg-black text-white px-6 py-2 rounded-full font-bold inline-flex items-center gap-2 hover:bg-neutral-800 transition-colors">
-                    Learn More <span>&rarr;</span>
-                </a>
-            </div>
-            <!-- Card 3 -->
-            <div class="bg-[#ffccfe] border-[3px] border-black rounded-[2rem] p-8 shadow-[6px_6px_0px_#000] flex flex-col items-start gap-4">
-                <div class="text-4xl text-black">⚙️</div>
-                <h3 class="text-2xl font-bold text-black mt-2">Sys Automation</h3>
-                <p class="font-medium text-black/80 flex-grow text-lg">
-                    Industrial microcontrollers, direct hardware integration, and utilities.
-                </p>
-                <a href="#projects" class="mt-4 bg-black text-white px-6 py-2 rounded-full font-bold inline-flex items-center gap-2 hover:bg-neutral-800 transition-colors">
-                    Learn More <span>&rarr;</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- 2. About Me Section -->
-        <section id="about" class="pt-20">
-            <h2 class="text-4xl font-bold uppercase mb-8 border-b-4 border-black dark:border-white inline-block">About Me</h2>
-            <div class="neo-box p-8 text-lg font-medium space-y-4">
-                <p>I am a Utilities &amp; Maintenance Engineer with strong interests in IT infrastructure, web development, and industrial automation.</p>
-                <p>Currently working at <span class="font-bold bg-neo-yellow text-black px-1">Fuel Terminal Tegal</span> through PT Pertamina Training &amp; Consulting supporting utilities operation and maintenance systems.</p>
-                <p>Previously worked as IT Support at <span class="font-bold bg-neo-blue text-white px-1">RSU Comal Baru</span> handling hardware troubleshooting, networking support, and operational system maintenance.</p>
-                <p>Also experienced as an entrepreneur managing an international shipping service (<span class="font-bold bg-neo-red text-white px-1">POS Otista</span>).</p>
-                <p>I enjoy building systems from Linux server setup to application deployment and automation devices.</p>
-            </div>
-        </section>
-
-        <!-- 3. Skills Section -->
-        <section id="skills" class="pt-20">
-            <h2 class="text-4xl font-bold uppercase mb-8 border-b-4 border-black dark:border-white inline-block">Skills</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Skill Card 1 -->
-                <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
-                    <h3 class="text-2xl font-bold mb-4 bg-neo-yellow inline-block px-2 border-2 border-black text-black">Web Development</h3>
-                    <ul class="space-y-2 font-bold list-disc list-inside marker:text-neo-blue">
-                        <li>Laravel</li>
-                        <li>PHP</li>
-                        <li>MySQL</li>
-                        <li>REST API</li>
-                    </ul>
-                </div>
-                
-                <!-- Skill Card 2 -->
-                <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
-                    <h3 class="text-2xl font-bold mb-4 bg-neo-blue text-white inline-block px-2 border-2 border-black">Infrastructure</h3>
-                    <ul class="space-y-2 font-bold list-disc list-inside marker:text-neo-yellow">
-                        <li>Linux</li>
-                        <li>VPS Deployment</li>
-                        <li>Nginx</li>
-                        <li>SSH Hardening</li>
-                        <li>Self-hosted services</li>
-                    </ul>
-                </div>
-                
-                <!-- Skill Card 3 -->
-                <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
-                    <h3 class="text-2xl font-bold mb-4 bg-neo-red text-white inline-block px-2 border-2 border-black">IT Support</h3>
-                    <ul class="space-y-2 font-bold list-disc list-inside marker:text-black dark:marker:text-white">
-                        <li>Hardware troubleshooting</li>
-                        <li>Network troubleshooting</li>
-                        <li>System installation</li>
-                    </ul>
-                </div>
-                
-                <!-- Skill Card 4 -->
-                <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
-                    <h3 class="text-2xl font-bold mb-4 bg-black text-white dark:bg-white dark:text-black inline-block px-2 border-2 border-black">Industrial Tech</h3>
-                    <ul class="space-y-2 font-bold list-disc list-inside marker:text-neo-red">
-                        <li>Microcontrollers</li>
-                        <li>Utilities systems</li>
-                        <li>Maintenance engineering</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. Experience Timeline Section -->
-        <section id="experience" class="pt-20">
-            <h2 class="text-4xl font-bold uppercase mb-8 border-b-4 border-black dark:border-white inline-block">Experience</h2>
-            
-            <div class="relative border-l-4 border-black dark:border-white ml-6 space-y-8 pb-4">
-                
-                <!-- Timeline Item 1 -->
-                <div class="relative pl-8">
-                    <div class="absolute w-6 h-6 bg-neo-yellow border-4 border-black -left-[14px] top-1"></div>
-                    <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
-                        <h3 class="text-2xl font-bold">Utilities &amp; Maintenance Engineer</h3>
-                        <p class="font-bold text-neo-blue text-lg mb-2">Fuel Terminal Tegal | PT Pertamina Training &amp; Consulting</p>
-                        <p class="font-medium">Supporting utilities operations and maintaining industrial and maintenance systems.</p>
-                    </div>
-                </div>
-                
-                <!-- Timeline Item 2 -->
-                <div class="relative pl-8">
-                    <div class="absolute w-6 h-6 bg-neo-blue border-4 border-black -left-[14px] top-1"></div>
-                    <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
-                        <h3 class="text-2xl font-bold">IT Support</h3>
-                        <p class="font-bold text-neo-red text-lg mb-2">RSU Comal Baru</p>
-                        <p class="font-medium">Hardware troubleshooting, networking support, and operational system maintenance.</p>
-                    </div>
-                </div>
-                
-                <!-- Timeline Item 3 -->
-                <div class="relative pl-8">
-                    <div class="absolute w-6 h-6 bg-neo-red border-4 border-black -left-[14px] top-1"></div>
-                    <div class="neo-box p-6 bg-white dark:bg-[#2a2a2a]">
-                        <h3 class="text-2xl font-bold">Entrepreneur</h3>
-                        <p class="font-bold text-black dark:text-white dark:bg-black bg-neo-yellow px-1 inline-block text-lg mb-2">POS Otista</p>
-                        <p class="font-medium mt-2">Managing an international shipping service business operations.</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 5. Projects Section -->
-        <section id="projects" class="pt-20">
-            <h2 class="text-4xl font-bold uppercase mb-8 border-b-4 border-black dark:border-white inline-block">Projects</h2>
-
-            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 pt-4 hide-scrollbar" style="scroll-padding-left: 1rem;">
-                
-                <!-- Project 1 -->
-                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
-                    <div class="h-48 bg-neo-blue border-b-[3px] border-black flex items-center justify-center relative shrink-0">
-                       <img src="./src/1.png" class="w-full h-full object-cover" alt="JagaPaket">
-                    </div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">JagaPaket</h3>
-                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Aplikasi khusus untuk seller marketplace yang merekam proses packing & pengiriman paket dalam bentuk video sebagai bukti dokumentasi saat terkendala.</p>
-                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
-                    <div class="h-48 bg-neo-red border-b-[3px] border-black flex items-center justify-center relative shrink-0">
-                       <img src="./src/2.png" class="w-full h-full object-cover" alt="Aplikasi Operasional MBG/SPPG">
-                    </div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">Aplikasi Operasional MBG/SPPG</h3>
-                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Sistem operasional terintegrasi untuk kegiatan mengelola bahan baku, distribusi, hingga monitoring penerima manfaat secara real-time.</p>
-                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
-                    <div class="h-48 bg-[#ffe156] border-b-[3px] border-black flex items-center justify-center relative shrink-0">
-                       <img src="./src/3.png" class="w-full h-full object-cover" alt="Aplikasi Absensi Sekolah">
-                    </div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">Aplikasi Absensi Sekolah</h3>
-                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Aplikasi absensi digital yang merekap kehadiran guru dan siswa otomatis dari jam masuk hingga pulang secara akurat & efisien.</p>
-                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
-                    </div>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
-                    <div class="h-48 bg-black border-b-[3px] border-black flex items-center justify-center relative shrink-0">
-                       <img src="./src/4.png" class="w-full h-full object-cover" alt="Tracker Pengeluaran & Pemasukan">
-                    </div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">Tracker Pengeluaran & Pemasukan</h3>
-                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Aplikasi pencatatan keuangan agar dapat memonitor cashflow. Cocok untuk kebutuhan pribadi maupun operasional bisnis dan UMKM.</p>
-                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
-                    </div>
-                </div>
-
-                <!-- Project 5 -->
-                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
-                    <div class="h-48 bg-[#38f89e] border-b-[3px] border-black flex items-center justify-center relative shrink-0">
-                       <img src="./src/5.png" class="w-full h-full object-cover" alt="Invoice Generator">
-                    </div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">Invoice Generator</h3>
-                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Aplikasi pembuat invoice digital yang memudahkan bisnis, freelancer, dan perusahaan membuat serta mengelola tagihan secara profesional.</p>
-                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
-                    </div>
-                </div>
-                
-                <!-- Project 6 -->
-                <div class="neo-box flex flex-col h-full bg-white dark:bg-[#2a2a2a] rounded-[2rem] overflow-hidden w-[85%] max-w-[320px] sm:max-w-[360px] md:w-[420px] md:max-w-[420px] flex-none snap-start border-[3px]">
-                    <div class="h-48 bg-[#ffccfe] border-b-[3px] border-black flex items-center justify-center relative shrink-0">
-                       <img src="./src/6.png" class="w-full h-full object-cover" alt="Personal & Company Website">
-                    </div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 dark:text-white text-black leading-tight">Personal & Company Website</h3>
-                        <p class="font-medium mb-6 flex-grow dark:text-gray-300 text-gray-800 text-base md:text-lg">Solusi pengembangan website portofolio pribadi hingga profil perusahaan. Dirancang responsif, interaktif, dan optimal (SEO-friendly) untuk menunjang kehadiran digital.</p>
-                        <!-- <a href="https://github.com/alwizen" target="_blank" class="w-full text-center py-3 bg-[#ffe156] text-black border-[3px] border-black rounded-full font-bold uppercase shadow-[4px_4px_0px_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#000] transition-all">View on GitHub</a> -->
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 6. Contact Section -->
-        <section id="contact" class="pt-20 pb-20">
-            <h2 class="text-4xl font-bold uppercase mb-8 border-b-4 border-black dark:border-white inline-block">Contact</h2>
-            
-            <div class="neo-box bg-neo-yellow dark:bg-neo-yellow dark:text-black p-8 md:p-12 text-center">
-                <h3 class="text-3xl font-bold uppercase mb-4">Let's Work Together</h3>
-                <p class="text-xl font-medium mb-8 max-w-2xl mx-auto">Feel free to reach out if you're looking for a developer, IT support, or an engineer to build your next system.</p>
-                
-                <a href="mailto:alwizen@outlook.com" class="neo-box neo-interactive inline-block px-8 py-4 bg-black text-white text-xl font-bold uppercase hover:bg-neutral-800 transition-colors mb-12 border-4 border-black">
-                    Email Me
-                </a>
-                
-                <div class="flex flex-wrap justify-center gap-6 mt-8">
-                    <a href="https://github.com/alwizen" target="_blank" class="neo-box neo-interactive bg-white dark:bg-white text-black px-6 py-2 font-bold uppercase">GitHub</a>
-                    <a href="https://id.linkedin.com/in/akhmad-alvi-zen-524b7223a" target="_blank" class="neo-box neo-interactive bg-white dark:bg-white text-black px-6 py-2 font-bold uppercase">LinkedIn</a>
-                    <a href="https://instagram.com/alwiz3n" target="_blank" class="neo-box neo-interactive bg-white dark:bg-white text-black px-6 py-2 font-bold uppercase">Instagram</a>
-                    <a href="https://facebook.com/knxvt" target="_blank" class="neo-box neo-interactive bg-white dark:bg-white text-black px-6 py-2 font-bold uppercase">Facebook</a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="border-t-4 border-black dark:border-white bg-white dark:bg-[#1a1a1a] py-6 text-center">
-        <p class="font-bold">© 2026 Alwizen.</p>
-    </footer>    <script>
-        // Check for saved theme preference or system preference
-        const isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        if (isDark) {
-            document.documentElement.classList.add('dark');
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const themeToggle = document.getElementById('theme-toggle');
-            themeToggle.addEventListener('click', () => {
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.theme = 'light';
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.theme = 'dark';
-                }
-            });
-
-            // Mobile menu toggle logic
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                mobileMenuBtn.textContent = mobileMenu.classList.contains('hidden') ? '☰' : '✕';
-            });
-
-            // Close mobile menu when clicking a link
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuBtn.textContent = '☰';
-                });
-            });
-
-            // Auto-scroll slider logic
-            const slider = document.querySelector('#projects .overflow-x-auto');
-            if(slider) {
-                let sliderInterval;
-                const startAutoScroll = () => {
-                    sliderInterval = setInterval(() => {
-                        const card = slider.children[0];
-                        if (!card) return;
-                        
-                        const scrollStep = card.offsetWidth + 24; // 24px is standard gap-6
-                        
-                        // Check if we reached the right edge (within 10px tolerance)
-                        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
-                            slider.scrollTo({ left: 0, behavior: 'smooth' });
-                        } else {
-                            slider.scrollTo({ left: slider.scrollLeft + scrollStep, behavior: 'smooth' });
-                        }
-                    }, 1000); // wait 1 second per slide
-                };
-
-                startAutoScroll();
-
-                // Pause on hover or touch so user can read/click
-                slider.addEventListener('mouseenter', () => clearInterval(sliderInterval));
-                slider.addEventListener('mouseleave', startAutoScroll);
-                slider.addEventListener('touchstart', () => clearInterval(sliderInterval), {passive: true});
-                slider.addEventListener('touchend', startAutoScroll);
+            function loop() {
+                // Smooth follow (lerp)
+                curX += (x - curX) * 0.18;
+                curY += (y - curY) * 0.18;
+                star.style.transform = 'translate(' + curX + 'px,' + curY + 'px)';
+                requestAnimationFrame(loop);
             }
-        });
+            loop();
+        })();
     </script>
 </body>
 </html>
